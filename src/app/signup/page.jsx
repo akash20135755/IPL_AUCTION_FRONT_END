@@ -4,127 +4,104 @@ import Link from 'next/link';
 import React from 'react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import styles from './LoginForm.module.css'; // Ensure this path is correct.
 
 const Signup = () => {
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
-    const age = e.target.age.value;
-    const email = e.target.email.value;
+    const name = e.target.name.value.trim();
+    const age = parseInt(e.target.age.value.trim(), 10);
+    const email = e.target.email.value.trim();
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
 
-    if (password !== confirmPassword) {
-      return toast.error('Password did not match, try again!');
+    if (!name || !email || !password || !confirmPassword) {
+      return toast.error('All fields are required!');
     }
 
-    // Add signup logic here (e.g., API request)
-    router.push('/');
+    if (age < 18) {
+      return toast.error('You must be at least 18 years old to sign up.');
+    }
+
+    if (password.length < 6) {
+      return toast.error('Password must be at least 6 characters long.');
+    }
+
+    if (password !== confirmPassword) {
+      return toast.error('Passwords do not match!');
+    }
+
+    toast.success('Signup successful!');
+    router.replace('/');
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-10 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/image.jpg')" }}>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col justify-center items-center gap-6 w-[90%] max-w-lg shadow-2xl bg-white/30 p-10 rounded-2xl animate-fadeIn backdrop-blur-md"
-      >
-        <h3 className="text-3xl font-bold text-gray-800">Create New Account!</h3>
+    <div
+      className={styles.body}
+      style={{
+        backgroundImage: "url('/image.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div className={styles.square}>
+        <i style={{ '--clr': '#00ff0a' }}></i>
+        <i style={{ '--clr': '#ff0057' }}></i>
+        <i style={{ '--clr': '#fffd44' }}></i>
 
-        {/* Name Input */}
-        <label className="w-full">
-          <span className="block text-sm font-semibold text-gray-600">
-            Name
-          </span>
-          <input
-            required
-            type="text"
-            name="name"
-            className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
-            placeholder="Enter your name"
-          />
-        </label>
+        <div className={styles.login}>
+          <h2>Signup</h2>
 
-        {/* Age Input */}
-        <label className="w-full">
-          <span className="block text-sm font-semibold text-gray-600">
-            Age
-          </span>
-          <input
-            required
-            type="number"
-            name="age"
-            min="1"
-            className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
-            placeholder="Enter your age"
-          />
-        </label>
+          <form onSubmit={handleSubmit}>
+            {/* Name Input */}
+            <div className={styles.inputBx}>
+              <input type="text" name="name" placeholder="Name" required />
+            </div>
 
-        {/* Email Input */}
-        <label className="w-full">
-          <span className="block text-sm font-semibold text-gray-600">
-            Email
-          </span>
-          <input
-            required
-            type="email"
-            name="email"
-            className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
-            placeholder="Enter your email address"
-          />
-        </label>
+            {/* Age Input */}
+            <div className={styles.inputBx}>
+              <input type="number" name="age" placeholder="Age" min="1" required />
+            </div>
 
-        {/* Password Input */}
-        <label className="w-full">
-          <span className="block text-sm font-semibold text-gray-600">
-            Password
-          </span>
-          <input
-            required
-            type="password"
-            name="password"
-            className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
-            placeholder="Enter your password"
-          />
-        </label>
+            {/* Email Input */}
+            <div className={styles.inputBx}>
+              <input type="email" name="email" placeholder="Email" required />
+            </div>
 
-        {/* Confirm Password Input */}
-        <label className="w-full">
-          <span className="block text-sm font-semibold text-gray-600">
-            Confirm Password
-          </span>
-          <input
-            required
-            type="password"
-            name="confirmPassword"
-            className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
-            placeholder="Confirm your password"
-          />
-        </label>
+            {/* Password Input */}
+            <div className={styles.inputBx}>
+              <input type="password" name="password" placeholder="Password" required />
+            </div>
 
-        {/* Already Have an Account */}
-        <div className="w-full text-left">
-          <span className="text-sm text-gray-700">
-            Already have an account?{' '}
-            <Link href="/login" className="text-blue-700 font-bold hover:underline">
-              Log In
-            </Link>
-          </span>
+            {/* Confirm Password Input */}
+            <div className={styles.inputBx}>
+              <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+            </div>
+
+            {/* Submit Button */}
+            <div className={styles.inputBx}>
+              <input type="submit" value="Sign Up" />
+            </div>
+          </form>
+
+          {/* Links */}
+          <div className={styles.links}>
+            <span>
+              Already have an account? 
+              <Link href="/login" style={{ marginLeft: '12px' }}>Log In</Link>
+            </span>
+          </div>
         </div>
-
-        {/* Sign Up Button */}
-        <button
-          className="w-full py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-md shadow-md hover:shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 mt-4"
-          type="submit"
-        >
-          Sign Up
-        </button>
-
-
-      </form>
-    </main>
+      </div>
+    </div>
   );
 };
 

@@ -1,64 +1,57 @@
-import Image from 'next/image';
+import styles from './LoginForm.module.css';
 import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-10 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/image.jpg')" }}>
-      <form
-        className="flex flex-col justify-center items-center gap-6 w-[90%] max-w-lg shadow-2xl bg-white/30 p-10 rounded-2xl animate-fadeIn backdrop-blur-md"
-      >
-        <h3 className="text-3xl font-bold text-gray-800">Welcome Back!</h3>
+    <main
+      className={styles.body}
+      style={{
+        backgroundImage: "url('/image.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <header className={`${styles.header} `}>
+        <h1>Gratias!!</h1>
+        <h2>ipl  Auction Simulator</h2>
+      </header>
 
-        {/* Email Input */}
-        <label className="w-full">
-          <span className="block text-sm font-semibold text-gray-600">
-            Email
-          </span>
-          <input
-            required
-            type="email"
-            name="email"
-            className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
-            placeholder="Enter your email address"
-          />
-        </label>
+      <div className={styles.square}>
+        <i style={{ "--clr": "#00ff0a" }}></i>
+        <i style={{ "--clr": "#ff0057" }}></i>
+        <i style={{ "--clr": "#fffd44" }}></i>
+        <div className={styles.login}>
+          <h2>Login</h2>
 
-        {/* Password Input */}
-        <label className="w-full">
-          <span className="block text-sm font-semibold text-gray-600">
-            Password
-          </span>
-          <input
-            required
-            type="password"
-            name="password"
-            className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
-            placeholder="Enter your password"
-          />
-        </label>
+          {/* Username Field */}
+          <div className={styles.inputBx}>
+            <input type="text" placeholder="Username" />
+          </div>
 
-        {/* Sign Up Link */}
-        <div className="w-full text-left">
-          <span className="text-sm text-gray-700">
-            Don't have an account?
-            <Link href="/signup" className="text-blue-700 font-bold ml-1 hover:underline">
-              Sign Up
-            </Link>
-          </span>
+          {/* Password Field */}
+          <div className={styles.inputBx}>
+            <input type="password" placeholder="Password" />
+          </div>
+
+          {/* Submit Button */}
+          <div className={styles.inputBx}>
+            <input type="submit" value="Sign in" />
+          </div>
+
+          {/* Links */}
+          <div className={styles.links}>
+            <span>
+              Don't have an account?   
+              <Link href="/signup" style={{ marginLeft: "12px" }}>Signup</Link>
+            </span>
+          </div>
         </div>
-
-        {/* Log In Button */}
-        <button
-          className="w-full py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-md shadow-md hover:shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 mt-4"
-          type="submit"
-        >
-          Log In
-        </button>
-
-
-
-      </form>
+      </div>
     </main>
   );
 }
