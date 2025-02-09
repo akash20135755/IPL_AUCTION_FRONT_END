@@ -1,54 +1,65 @@
 'use client'
 import React from 'react'
 import Link from 'next/link';
-// import { toast } from 'react-hot-toast';
-// import Loading from '@/components/loading/Loading';
 import { useRouter } from 'next/navigation';
 
 const LogIn = () => {
     const router = useRouter();
 
-    // if(loading || aloading){
-    //     return <Loading/>
-    // }
+    return (
+        <div className="flex min-h-screen flex-col items-center justify-center p-10 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/image.jpg')" }}>
+            <form
+                className="flex flex-col justify-center items-center gap-6 w-[90%] max-w-lg shadow-2xl bg-white/30 p-10 rounded-2xl animate-fadeIn backdrop-blur-md"
+            >
+                <h3 className="text-3xl font-bold text-gray-800">Welcome Back!</h3>
 
-    // if(error || aerror){
-    //     return toast.error(error?.message || aerror?.message);
-    // }
+                <label className="w-full">
+                    <span className="block text-sm font-semibold text-gray-600">
+                        Email
+                    </span>
+                    <input 
+                        required 
+                        type="email" 
+                        name="email" 
+                        className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
+                        placeholder="Enter your email address"
+                    />
+                </label>
 
-    // if(user){
-    //     return router.push('/');
-    // }
+                <label className="w-full">
+                    <span className="block text-sm font-semibold text-gray-600">
+                        Password
+                    </span>
+                    <input 
+                        required 
+                        type="password" 
+                        name="password" 
+                        className="mt-2 w-full px-4 py-3 bg-gray-50 text-black border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
+                        placeholder="Enter your password"
+                    />
+                </label>
 
-  return (
-    <form
-        
-        className='flex flex-col justify-center items-center gap-5 max-w-lg  shadow-2xl shadow-gray-900 h-screen hover:shadow-gray-300  bg-white mx-auto rounded-md text-gray-900'
+                <div className="w-full text-left">
+                    <span className="text-sm text-gray-700">
+                        Don't have an account? 
+                        <Link href="/signup" className="text-blue-700 font-bold ml-1 hover:underline">
+                            Sign Up
+                        </Link>
+                    </span>
+                </div>
 
-        >
-            <h3 className='text-2xl '>Please Log In! </h3>
+                <button 
+                    className="w-full py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold rounded-md shadow-md hover:shadow-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300"
+                    type="submit"
+                >
+                    Log In
+                </button>
 
-            <label className="block">
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                    Email
-                </span>
-                <input required type="email" name="email" className="mt-1 px-3 py-4 w-[350px] md:w-[450px] bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="Enter your email address" />
-            </label>
-
-            <label className="block">
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                    Password
-                </span>
-                <input required type="password" name="password" className="mt-1 w-[350px] md:w-[450px] px-3 py-4 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1" placeholder="Enter your password" />
-            </label>
-            <span className='block w-full mr-auto ml-7'>Dont have any Account? <Link className='text-blue-700 font-bold' href="/signup">Sign Up</Link></span>
-            <button className='bg-[#53c28b] text-white rounded-md p-[15px] w-[90%]' type="submit">Log In</button>
-            <button 
-            
-            className='bg-[#53c28b] text-white rounded-md p-[15px] w-[90%]'
-             >Continue With Google</button>
-        </form>
-  )
+                
+            </form>
+        </div>
+    )
 }
 
 export default LogIn;
